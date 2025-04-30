@@ -1,0 +1,23 @@
+{
+  "name": "express-learn",
+  "version": "1.0.0",
+  "description": "learn express router and middleware",
+  "homepage": "https://github.com/Shaobangzhu/express-learn#readme",
+  "bugs": {
+    "url": "https://github.com/Shaobangzhu/express-learn/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Shaobangzhu/express-learn.git"
+  },
+  "license": "MIT",
+  "author": "clu",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "devDependencies": {
+    "express": "^5.1.0"
+  }
+}
