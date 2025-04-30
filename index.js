@@ -28,12 +28,20 @@ app.get("/", (req, res) => {
   //   res.status(404).send("Could Not Find the Webpage");
 
   // 响应头
-  res.set({
-    'Content-Type':'text/plain; charset=utf-8',
-    'Access-Control-Allow-Origin':'*'
-})
-  res.send('<h1>Hi Express</h1>')
+  //   res.set({
+  //     "Content-Type": "text/plain; charset=utf-8",
+  //     "Access-Control-Allow-Origin": "*",
+  //   });
+
+  if(true) {
+    // 如果没有登录, 请先登录
+    res.redirect('/login')
+  }
 });
+
+app.get('/login', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'login.html'))
+})
 
 app.listen(port, () => {
   console.log("SERVER starts at Port: ${port} SUCCESS");
