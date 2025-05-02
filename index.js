@@ -1,48 +1,42 @@
-const path = require("path");
-const express = require("express");
+// 安装ejs模板引擎
 
-const app = express();
-const port = 3030;
+const path = require("path")
+const express = require("express")
 
-app.get("/", (req, res) => {
-  // 属性
-  // console.log(res.app === app, res.req === req)
-  // 方法
-  // 发送数据(send方法里面封装了node的end响应周期)
-  // res.send('<h1>Hi Express</h1>')
-  //   res.json([
-  //     {
-  //       id: 1,
-  //       username: "clu1json",
-  //     },
-  //     {
-  //       id: 2,
-  //       username: "clu2json",
-  //     },
-  //   ]);
-  // 发送文件 (静态文件)
-  //   console.log(path.join(__dirname, 'public', 'index.html'))
-  //   res.sendFile(path.join(__dirname, 'public', 'index.html'))
-  // 状态码
-  //   res.sendStatus(404)
-  //   res.status(404).send("Could Not Find the Webpage");
+const app = express()
+const port = 3030
 
-  // 响应头
-  //   res.set({
-  //     "Content-Type": "text/plain; charset=utf-8",
-  //     "Access-Control-Allow-Origin": "*",
-  //   });
+// /user/1
+app.get("/user/:id", (req, res) => {
+  const { id } = req.params
 
-  if(true) {
-    // 如果没有登录, 请先登录
-    res.redirect('/login')
-  }
+  // 设置模板所在目录,默认是views
+  app.set('views', path.join(__dirname, 'view'))
+
+  // 设置默认的模板后缀名,省略不写的时候有用
+  app.set('view engine', 'html')
+
+  // 设置指定后缀名的文件使用什么模板引擎
+  app.engine('html', require('ejs').__express)
+
+  // 使用res.render() 渲染模板
+  res.render("user", {
+    id,
+    title:`用户${id}的首页`,
+    html: '<h1>我是HTML字符串</h1>',
+    user:[
+      {
+        username: 'clu',
+        gender: 'male'
+      },
+      {
+        username: 'clu2',
+        gender: 'female'
+      }
+    ]
+  });
 });
 
-app.get('/login', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'login.html'))
-})
-
 app.listen(port, () => {
-  console.log("SERVER starts at Port: ${port} SUCCESS");
+  console.log(`Server starts at Port ${port} Successfully`);
 });
