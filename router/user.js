@@ -3,11 +3,12 @@ const router = express.Router();
 
 // 1.数据校验
 const validate = (req, res, next) => {
-  if (true) {
+  if (false) {
     console.log("数据校验通过");
     next();
   } else {
-    console.log("数据校验失败");
+    // 报错
+    next(new Error('用户名必填'))
   }
 };
 
